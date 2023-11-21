@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+tea1 = Tea.create!(title: "Blueberry Green Tea", description: "A scrumptious evening tea", temperature: 208, brew_time: 15)
+tea2 = Tea.create!(title: "Black Tea", description: "A scrumptious evening tea", temperature: 208, brew_time: 15)
+customer = Customer.create!(first_name: "Jo", last_name: "Jackson", email: "jackson@gmail.com", address: "123 Main Ave")
+
+subscription = Subscription.create!(title: "Blueberry Green Tea", price: 22.50, status: true, frequency: "3 months", customer: customer, tea: tea1)
