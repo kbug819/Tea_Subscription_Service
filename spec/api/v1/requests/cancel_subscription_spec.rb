@@ -27,7 +27,26 @@ describe "subscriptions update endpoint" do
     expect(update[:data][:attributes]).to be_a Hash
     expect(update[:data][:attributes][:title]).to eq("#{tea1.title} Subscription")
     expect(update[:data][:attributes][:sub_status]).to eq("Cancelled")
+
+    subscription_update = {
+      subscription_id: "#{subscription.id}",
+      subscription: true,
+      message: "cancel subscription"
+    }
+
+    put "/api/v1/subscriptions/#{subscription.id}", headers: headers, params: JSON.generate(subscription_update)
+    expect(response).to be_successful 
+    update = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(update[:data]).to be_a Hash
+    expect(update[:data][:id].to_i).to be_an Integer
+    expect(update[:data][:type]).to eq("subscription")
+    expect(update[:data][:attributes]).to be_a Hash
+    expect(update[:data][:attributes][:title]).to eq("#{tea1.title} Subscription")
+    expect(update[:data][:attributes][:sub_status]).to eq("Subscribed")
   end
+
+  
 
   it "update subscription - error message" do 
     tea1 = Tea.create!(title: "Blueberry Green Tea", description: "A scrumptious evening tea", temperature: 208, brew_time: 15, price: 20.0)
