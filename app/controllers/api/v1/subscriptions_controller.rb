@@ -7,8 +7,12 @@ class Api::V1::SubscriptionsController < ApplicationController
   def create
     tea = Tea.find(params[:tea_id])
     customer = Customer.find(params[:customer_id])
-    subscription = Subscription.create!(title: "#{tea.title} Subscription", price: tea.price, frequency: (params[:frequency]), tea: tea, customer: customer, sub_status: 1)
-    render json: SubscriptionSerializer.new(subscription), status: :created
+    require 'pry';binding.pry
+    if customer && tea
+      subscription = Subscription.create!(title: "#{tea.title} Subscription", price: tea.price, frequency: (params[:frequency]), tea: tea, customer: customer, sub_status: 1)
+      render json: SubscriptionSerializer.new(subscription), status: :created
+    else
+    end
   end
 
   def update
