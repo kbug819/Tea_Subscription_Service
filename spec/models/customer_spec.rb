@@ -8,7 +8,7 @@ RSpec.describe Customer, type: :model do
 
   describe "validations" do
     it "should validate a customer" do 
-      customer = Customer.create!(first_name: "Jo", last_name: "Jackson", email: "jackson@gmail.com", address: "123 Main Ave")
+      customer = Customer.create!(first_name: "Jo", last_name: "Jackson", email: "jackson4@gmail.com", address: "123 Main Ave")
       expect(customer).to validate_presence_of(:first_name)
       expect(customer).to validate_presence_of(:last_name)
       expect(customer).to validate_presence_of(:email)
